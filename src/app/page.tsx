@@ -4,20 +4,55 @@ import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { useAuthStore } from "@/stores/authStore";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const { user, isAuthenticated, logout } = useAuth();
+  const router = useRouter();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState("");
+
+  const handleSearch = () => {
+    if (searchKeyword.trim()) {
+      router.push(`/prompts?search=${encodeURIComponent(searchKeyword.trim())}`);
+    } else {
+      router.push('/prompts');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-900">
       {/* 헤더 */}
       <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent flex-shrink-0">
             PromptHub
           </div>
-          <nav className="hidden md:flex items-center space-x-8">
+          
+          {/* 중앙 검색바 */}
+          <div className="flex-1 max-w-md mx-8">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="프롬프트 검색..."
+                value={searchKeyword}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+                className="w-full px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 pr-10"
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              />
+              <button
+                onClick={handleSearch}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-gray-400 hover:text-cyan-400 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* 네비게이션 (데스크톱) */}
+          <nav className="hidden lg:flex items-center space-x-6">
             <Link href="/prompts" className="text-gray-300 hover:text-cyan-400 transition-colors">
               프롬프트 탐색
             </Link>
@@ -29,7 +64,7 @@ export default function HomePage() {
             </Link>
           </nav>
           
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 flex-shrink-0">
             {isAuthenticated && user ? (
               // 로그인된 상태
               <>

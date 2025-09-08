@@ -64,4 +64,25 @@ export const authAPI = {
     const data = await response.json();
     return data.data;
   },
-};
+}
+
+// 기존 코드에 추가
+export const userAPI = {
+  // 현재 사용자 정보 조회
+  getProfile: async (token: string) => {
+    const response = await fetch(`${API_BASE_URL}/api/v1/members/me`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to get user profile');
+    }
+
+    const data = await response.json();
+    return data.data;
+  },
+
+}

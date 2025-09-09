@@ -25,23 +25,25 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 flex items-center justify-center p-4">
       {/* 카드 컨테이너 */}
-      <div className="w-full max-w-md bg-slate-800 rounded-2xl p-8 shadow-xl border border-slate-700">
+      <div className="w-full max-w-md bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-pink-100">
         {/* 로고 및 제목 */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
-            <span className="text-white text-xl font-bold">PH</span>
+          <div className="mb-4">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2">
+              PromptHub
+            </h1>
           </div>
-          <h1 className="text-3xl font-bold text-white mb-3">Create account</h1>
-          <p className="text-slate-400">Join 350,000+ AI enthusiasts and creators</p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-3">Create account</h2>
+          <p className="text-gray-600">Join 350,000+ AI enthusiasts and creators</p>
         </div>
 
         {/* 소셜 로그인 버튼들 */}
         <div className="space-y-4 mb-8">
           <button
             onClick={handleGoogleLogin}
-            className="w-full bg-white text-gray-800 py-3 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-3"
+            className="w-full bg-white border-2 border-gray-200 text-gray-800 py-4 px-4 rounded-full font-medium hover:border-pink-200 hover:bg-pink-50 transition-all shadow-sm flex items-center justify-center gap-3"
           >
             <FcGoogle size={20} />
             Continue with Google
@@ -49,7 +51,7 @@ export default function LoginPage() {
 
           <button
             onClick={handleNaverLogin}
-            className="w-full bg-[#03C75A] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#02B351] transition-colors flex items-center justify-center gap-3"
+            className="w-full bg-[#03C75A] text-white py-4 px-4 rounded-full font-medium hover:bg-[#02B351] transition-colors shadow-sm flex items-center justify-center gap-3"
           >
             <SiNaver size={20} />
             Continue with Naver
@@ -57,7 +59,7 @@ export default function LoginPage() {
 
           <button
             onClick={handleKakaoLogin}
-            className="w-full bg-[#FEE500] text-black py-3 px-4 rounded-lg font-medium hover:bg-[#FDDC00] transition-colors flex items-center justify-center gap-3"
+            className="w-full bg-[#FEE500] text-black py-4 px-4 rounded-full font-medium hover:bg-[#FDDC00] transition-colors shadow-sm flex items-center justify-center gap-3"
           >
             <RiKakaoTalkFill size={20} />
             Continue with Kakao
@@ -66,13 +68,13 @@ export default function LoginPage() {
 
         {/* 하단 링크 */}
         <div className="text-center">
-          <p className="text-slate-400 text-sm mb-4">
+          <p className="text-gray-500 text-sm mb-4">
             By creating an account, you agree to our{" "}
-            <a href="#" className="text-blue-400 hover:underline">
+            <a href="#" className="text-pink-500 hover:text-pink-600 underline transition-colors">
               terms of service
             </a>
           </p>
-          <a href="#" className="text-blue-400 hover:underline text-sm">
+          <a href="#" className="text-pink-500 hover:text-pink-600 underline text-sm transition-colors">
             I already have an account
           </a>
         </div>

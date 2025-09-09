@@ -330,7 +330,7 @@ const fetchPrompts = async (page = 0, keyword = "", categoryId: number | null = 
         )}
 
         {/* 메인 콘텐츠 */}
-        <main className="flex-1 lg:ml-0 px-6 py-8">
+        <main className="flex-1 lg:ml-0 px-8 lg:px-12 py-8 max-w-[1600px] mx-auto">
           {/* 페이지 헤더 */}
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -371,64 +371,77 @@ const fetchPrompts = async (page = 0, keyword = "", categoryId: number | null = 
         {!loading && !error && (
             <>
                 {/* 결과 정보 - 더 눈에 띄게 수정 */}
-                <div className="mb-6 p-4 bg-slate-800/50 rounded-lg border border-slate-700">
-                    <div className="flex items-center justify-between">
-                        <div className="text-white">
-                        <span className="text-lg font-semibold">총 {pagination.totalCount ?? 0}개의 프롬프트</span>
-                        {selectedCategory && (
-                            <span className="ml-2 text-cyan-400">
-                            ({categories.find(c => c.id === selectedCategory)?.name} 카테고리)
-                            </span>
-                        )}
+                <div className="max-w-7xl mx-auto mb-8">
+                    <div className="px-4 py-4 bg-slate-800/50 rounded-lg border border-slate-700">
+                        <div className="flex items-center justify-between">
+                            <div className="text-white">
+                            <span className="text-lg font-semibold">총 {pagination.totalCount ?? 0}개의 프롬프트</span>
+                            {selectedCategory && (
+                                <span className="ml-2 text-cyan-400">
+                                ({categories.find(c => c.id === selectedCategory)?.name} 카테고리)
+                                </span>
+                            )}
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="space-y-6">
+                {/* 프롬프트 카드 그리드 */}
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-4">
                 {prompts.map((prompt) => (
-                    <article key={prompt.id} className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-slate-600 transition-colors">
-                    {/* 기존 프롬프트 카드 내용 */}
-                    <div className="flex items-start justify-between mb-4">
-                        <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                            <span className="px-3 py-1 bg-purple-900/30 text-purple-300 text-sm rounded-full">
-                            {prompt.categoryName}
-                            </span>
-                            <span className="text-sm text-gray-400">
-                            by {prompt.authorNickname}
-                            </span>
-                        </div>
-                        
-                        <Link href={`/prompts/${prompt.id}`}>
-                            <h2 className="text-xl font-bold text-white mb-2 hover:text-cyan-400 transition-colors cursor-pointer">
-                            {prompt.title}
-                            </h2>
-                        </Link>
-                        
-                        <p className="text-gray-300 mb-4 line-clamp-2">
-                            {prompt.description}
-                        </p>
-                        
-                        <div className="flex items-center gap-6 text-sm text-gray-400">
-                            <span className="flex items-center gap-1">
-                            조회 {prompt.viewsCount.toLocaleString()}
-                            </span>
-                            <span className="flex items-center gap-1">
-                            좋아요 {prompt.likesCount.toLocaleString()}
-                            </span>
-                            <span>
-                            {new Date(prompt.createdAt).toLocaleDateString()}
-                            </span>
-                        </div>
-                        </div>
-                    </div>
-                    </article>
+                    <Link key={prompt.id} href={`/prompts/${prompt.id}`}>
+                        <article className="bg-slate-800 rounded-xl border border-slate-700 hover:border-slate-600 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group h-64 flex flex-col">
+                            {/* 카드 상단: 카테고리 태그 */}
+                            <div className="p-4 pb-2">
+                                <span className="px-3 py-1 bg-purple-900/30 text-purple-300 text-sm rounded-full">
+                                    {prompt.categoryName}
+                                </span>
+                            </div>
+                            
+                            {/* 카드 중앙: 제목 */}
+                            <div className="px-4 py-2 flex-1 flex items-center">
+                                <h2 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors line-clamp-3 text-center w-full leading-relaxed">
+                                    {prompt.title}
+                                </h2>
+                            </div>
+                            
+                            {/* 카드 하단: 통계 정보 */}
+                            <div className="p-4 pt-2 border-t border-slate-700/50">
+                                <div className="text-xs text-gray-400 mb-2">
+                                    by {prompt.authorNickname}
+                                </div>
+                                <div className="flex items-center justify-between text-xs text-gray-400">
+                                    <div className="flex items-center gap-3">
+                                        <span className="flex items-center gap-1">
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                            {prompt.viewsCount > 999 ? `${(prompt.viewsCount / 1000).toFixed(1)}k` : prompt.viewsCount}
+                                        </span>
+                                        <span className="flex items-center gap-1">
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                            </svg>
+                                            {prompt.likesCount > 999 ? `${(prompt.likesCount / 1000).toFixed(1)}k` : prompt.likesCount}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        {new Date(prompt.createdAt).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' })}
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </Link>
                 ))}
+                    </div>
                 </div>
 
                 {/* 페이지네이션 - 항상 표시하도록 수정 */}
-                <div className="flex justify-center mt-12">
-                    <div className="flex items-center space-x-2">
+                <div className="max-w-7xl mx-auto px-4 mt-16">
+                    <div className="flex justify-center">
+                        <div className="flex items-center space-x-2">
                         {/* 이전 버튼 */}
                         <button
                         onClick={() => handlePageChange(pagination.currentPage - 1)}
@@ -461,6 +474,7 @@ const fetchPrompts = async (page = 0, keyword = "", categoryId: number | null = 
                         >
                         다음
                         </button>
+                        </div>
                     </div>
                 </div>
             </>

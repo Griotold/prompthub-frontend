@@ -193,7 +193,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">인기 카테고리</h2>
-            <p className="text-gray-600">다양한 분야의 검증된 프롬프트를 카테고리별로 탐색해보세요</p>
+            <h3 className="text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
+              다양한 분야의 검증된 프롬프트를 카테고리별로 탐색해보세요
+            </h3>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -251,6 +253,33 @@ export default function HomePage() {
                 description: '전략, 기획, 프레젠테이션',
                 likes: '1.2k',
                 prompts: '89'
+              },
+              { 
+                name: '번역', 
+                iconBg: 'bg-indigo-500', 
+                icon: '🌐', 
+                count: '80+',
+                description: '다국어 번역, 문법 교정, 언어 학습',
+                likes: '1.2k',
+                prompts: '89'
+              },
+              { 
+                name: '교육', 
+                iconBg: 'bg-emerald-500', 
+                icon: '📚', 
+                count: '140+',
+                description: '강의 자료, 퀴즈, 설명, 튜터링',
+                likes: '1.2k',
+                prompts: '89'
+              },
+              { 
+                name: '창작', 
+                iconBg: 'bg-rose-500', 
+                icon: '🎭', 
+                count: '160+',
+                description: '스토리텔링, 아이디어 발상, 크리에이티브 기획',
+                likes: '1.2k',
+                prompts: '89'
               }
             ].map((category, index) => (
               <Link
@@ -294,6 +323,131 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* ========== 인기 프롬프트 섹션 (회색 배경) ========== */}
+      <div className="bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">인기 프롬프트</h2>
+            <h3 className="text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
+              커뮤니티에서 가장 사랑받는 검증된 프롬프트들을 만나보세요
+            </h3>
+          </div>
+          
+          {/* 프롬프트 카드들이 들어갈 자리 - 나중에 구현 예정 */}
+          <div className="mb-12">
+            {/* TODO: 실제 인기 프롬프트 데이터 연동 */}
+          </div>
+          
+          {/* 더 많은 프롬프트 보기 버튼 */}
+          <div className="text-center">
+            <Link
+              href="/prompts"
+              className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full font-semibold hover:opacity-90 transition-opacity shadow-lg"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span>더 많은 프롬프트 보기</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    
+      {/* ========== 푸터 ========== */}
+      <footer className="bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* 왼쪽: 브랜드 섹션 */}
+            <div>
+              <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-500 bg-clip-text text-transparent mb-4">
+                PromptHub
+              </div>
+              <p className="text-gray-400 leading-relaxed">
+                AI 프롬프트를 공유하고 발견하는 최고의 커뮤니티 플랫폼입니다. <br />
+                더 나은 AI 결과를 위한 검증된 프롬프트를 만나보세요.
+              </p>
+            </div>
+
+            {/* 오른쪽: 빠른 링크와 고객지원 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* 빠른 링크 */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">빠른 링크</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link href="/prompts" className="text-gray-400 hover:text-white transition-colors">
+                      프롬프트 탐색
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/categories" className="text-gray-400 hover:text-white transition-colors">
+                      카테고리
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/prompts/popular" className="text-gray-400 hover:text-white transition-colors">
+                      인기 프롬프트
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/prompts/create" className="text-gray-400 hover:text-white transition-colors">
+                      프롬프트 업로드
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/premium" className="text-gray-400 hover:text-white transition-colors">
+                      프리미엄
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 고객지원 */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">고객지원</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
+                      도움말
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/faq" className="text-gray-400 hover:text-white transition-colors">
+                      자주 묻는 질문
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
+                      문의하기
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+                      개인정보처리방침
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+                      이용약관
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* 하단 구분선과 저작권 */}
+          <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div className="text-gray-400 text-sm">
+              © 2025 PromptHub. All rights reserved.
+            </div>
+            <div className="text-gray-400 text-sm mt-4 md:mt-0">
+              Made with ❤️ for AI Community
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
